@@ -8,7 +8,7 @@
   <body>
     <div class="login-container">
       <h2>Login to Art Gallery</h2>
-      <form action="dashboard.html" method="get">
+      <form>
         <input
           type="text"
           name="username"
@@ -21,11 +21,26 @@
           placeholder="Password"
           required
         /><br />
-        <input type="submit" value="Login" />
+        <input type="submit" />
       </form>
-      <p class="note">
-        Note: This is a static login form (no actual validation).
-      </p>
     </div>
+
+    <script>
+      document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault(); // prevent actual form submission
+
+        const username = document.querySelector('input[name="username"]').value;
+        const password = document.querySelector('input[name="password"]').value;
+
+        // Basic check (replace this logic with Firebase auth later)
+        if (username === "admin" && password === "1234") {
+          alert("Login successful!");
+          // Redirect to main gallery page
+          window.location.href = "gallery.html";
+        } else {
+          alert("Invalid username or password.");
+        }
+      });
+    </script>
   </body>
 </html>
