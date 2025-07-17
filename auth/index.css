@@ -1,122 +1,78 @@
+/* Reset and base */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f3f3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .login-container {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 300px;
-    text-align: center;
-  }
-  
-  .login-container h2 {
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  input[type="submit"] {
-    width: 95%;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #555;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f3f3f3;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  align-items: flex-start;
+}
 
+.gallery-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
 
-  .gallery-container {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .art-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .art-card {
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  }
-  
-  .art-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .logout-button {
-    display: inline-block;
-    margin-top: 30px;
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border-radius: 5px;
-  }
-  
-  .logout-button:hover {
-    background-color: #555;
-  }
-  
+h2 {
+  margin-top: 0;
+  color: #333;
+}
 
-
-
-
-/* Upload form */
-.upload-form {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+/* Search bar */
+#search {
+  width: 100%;
   max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 10px;
+  margin: 20px auto;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* Upload Form */
+.upload-form {
+  margin: 30px auto;
+  max-width: 400px;
+  text-align: left;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fafafa;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 
 .upload-form h3 {
-  margin-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #444;
 }
 
 .upload-form input[type="text"],
 .upload-form input[type="file"] {
   width: 100%;
-  padding: 8px;
-  margin: 10px 0;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 .upload-form button {
-  padding: 10px 20px;
+  width: 100%;
+  padding: 10px;
   background-color: #333;
   color: white;
+  font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -124,12 +80,66 @@ body {
   background-color: #555;
 }
 
-/* Search box styling */
-#search {
-  padding: 10px;
-  width: 50%;
-  margin: 20px auto;
-  display: block;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+/* Art Gallery Grid */
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.art-card {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.art-card:hover {
+  transform: scale(1.03);
+}
+
+.art-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.art-card p {
+  margin: 0;
+  font-weight: bold;
+  color: #222;
+}
+
+/* Logout Button */
+.logout-button {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 10px 25px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #555;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .gallery-container {
+    padding: 20px;
+  }
+
+  .upload-form {
+    padding: 15px;
+  }
+
+  #search {
+    width: 100%;
+  }
 }
