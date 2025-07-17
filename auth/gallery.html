@@ -4,25 +4,82 @@
     <meta charset="UTF-8" />
     <title>Art Gallery</title>
     <link rel="stylesheet" href="index.css" />
-    <!-- reuse your existing CSS -->
   </head>
   <body>
     <div class="gallery-container">
       <h2>Welcome to the Art Gallery</h2>
 
-      <div class="art-grid">
-        <div class="art-card">
-          <img src="images/art1.jpg" alt="Art 1" />
-          <p>Starry Night</p>
-        </div>
-        <div class="art-card">
-          <img src="images/art2.jpg" alt="Art 2" />
-          <p>Mona Lisa</p>
-        </div>
-        <!-- Add more artworks here -->
+      <!-- Search bar -->
+      <input type="text" id="search" placeholder="Search artworks..." />
+
+      <!-- Upload form -->
+      <div class="upload-form">
+        <h3>Add New Artwork</h3>
+        <form id="upload-form">
+          <input type="text" id="title" placeholder="Artwork Title" required />
+          <input type="file" id="image" accept="image/*" required />
+          <button type="submit">Upload</button>
+        </form>
       </div>
+
+      <!-- Gallery -->
+      <div class="art-grid" id="art-grid"></div>
 
       <a href="index.html" class="logout-button">Logout</a>
     </div>
+
+    <!-- Script to handle gallery, search, and upload -->
+    <script>
+      let artworks = [
+        { title: "Starry Night", image: "images/art1.jpg" },
+        { title: "Mona Lisa", image: "images/art2.jpg" },
+      ];
+
+      const container = document.getElementById("art-grid");
+
+      function renderGallery(list) {
+        container.innerHTML = "";
+        list.forEach((art) => {
+          const card = document.createElement("div");
+          card.className = "art-card";
+          card.innerHTML = `
+          <img src="${art.image}" alt="${art.title}" />
+          <p>${art.title}</p>
+        `;
+          container.appendChild(card);
+        });
+      }
+
+      renderGallery(artworks);
+
+      // Search filter
+      document.getElementById("search").addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
+        const filtered = artworks.filter((art) =>
+          art.title.toLowerCase().includes(searchTerm)
+        );
+        renderGallery(filtered);
+      });
+
+      // Handle form submission
+      document
+        .getElementById("upload-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const title = document.getElementById("title").value;
+          const file = document.getElementById("image").files[0];
+
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              artworks.push({ title: title, image: event.target.result });
+              renderGallery(artworks);
+              document.getElementById("upload-form").reset();
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+    </script>
   </body>
 </html>
