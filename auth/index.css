@@ -80,12 +80,12 @@ h2 {
   background-color: #555;
 }
 
-/* Art Gallery Grid */
+
 .art-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
-  margin-top: 30px;
+  gap: 40px;
+   margin-top: 50px;
 }
 
 .art-card {
@@ -113,7 +113,7 @@ h2 {
   color: #222;
 }
 
-/* Logout Button */
+
 .logout-button {
   display: inline-block;
   margin-top: 40px;
@@ -129,7 +129,7 @@ h2 {
   background-color: #555;
 }
 
-/* Mobile responsiveness */
+
 @media (max-width: 600px) {
   .gallery-container {
     padding: 20px;

@@ -22,15 +22,15 @@
         </form>
       </div>
 
-      <!-- Gallery -->
       <div class="art-grid" id="art-grid"></div>
 
       <a href="index.html" class="logout-button">Logout</a>
     </div>
 
-    <!-- Script to handle gallery, search, and upload -->
     <script>
-      let artworks = [
+      const container = document.getElementById("art-grid");
+
+      let artworks = JSON.parse(localStorage.getItem("artworks")) || [
         {
           title: "Starry Night",
           image:
@@ -43,24 +43,23 @@
         },
       ];
 
-      const container = document.getElementById("art-grid");
-
+      // Render artworks to gallery
       function renderGallery(list) {
         container.innerHTML = "";
         list.forEach((art) => {
           const card = document.createElement("div");
           card.className = "art-card";
           card.innerHTML = `
-          <img src="${art.image}" alt="${art.title}" />
-          <p>${art.title}</p>
-        `;
+            <img src="${art.image}" alt="${art.title}" />
+            <p>${art.title}</p>
+          `;
           container.appendChild(card);
         });
       }
 
       renderGallery(artworks);
 
-      // Search filter
+      // Filter/search
       document.getElementById("search").addEventListener("input", function () {
         const searchTerm = this.value.toLowerCase();
         const filtered = artworks.filter((art) =>
@@ -69,7 +68,7 @@
         renderGallery(filtered);
       });
 
-      // Handle form submission
+      // Handle upload
       document
         .getElementById("upload-form")
         .addEventListener("submit", function (e) {
@@ -81,11 +80,13 @@
           if (file) {
             const reader = new FileReader();
             reader.onload = function (event) {
-              artworks.push({ title: title, image: event.target.result });
+              const newArt = { title: title, image: event.target.result };
+              artworks.push(newArt);
+              localStorage.setItem("artworks", JSON.stringify(artworks)); // Save to localStorage
               renderGallery(artworks);
               document.getElementById("upload-form").reset();
             };
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(file); // convert to base64
           }
         });
     </script>
